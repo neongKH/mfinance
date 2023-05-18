@@ -17,12 +17,12 @@ class AuthService {
 	}
 
 	register(user) {
-		return axios.post(API_URL + "create", {
-			username: user.username,
-			email: user.email,
-			password: user.password,
+		return axios.post(API_URL + "register", { // Update the endpoint URL to the registration endpoint
+		  username: user.username,
+		  email: user.email,
+		  password: user.password,
 		});
-	}
+	  }
 
 	verify() {
 		const user = JSON.parse(localStorage.getItem("user"));

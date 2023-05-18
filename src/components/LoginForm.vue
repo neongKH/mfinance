@@ -1,6 +1,6 @@
 <template>
 	<div class="col-md-12">
-		<div class="card card-container">
+		<div class="container">
 			<Form @submit="handleLogin" :validation-schema="schema">
 				<div class="form-group">
 					<label for="username">Username</label>
@@ -70,7 +70,7 @@
 		},
 		created() {
 			if (this.loggedIn) {
-				this.$router.push("/about");
+				this.$router.push("/dashboard");
 			}
 		},
 		methods: {
@@ -79,7 +79,7 @@
 
 				this.$store.dispatch("auth/login", user).then(
 					() => {
-						this.$router.push("/about");
+						this.$router.push("/dashboard");
 					},
 					(error) => {
 						this.loading = false;
@@ -96,4 +96,6 @@
 	};
 </script>
 
-<style scoped></style>
+<style scoped>
+	
+</style>
