@@ -5,17 +5,22 @@
 				<div class="header__logo">MFinance</div>
 				<div class="header__nav">
 					<div class="header__nav-link">
-						<a href="#">Log in</a>
+						<a class="login" @click="showLoginDialog">Log in</a>
 					</div>
 					<div class="header__nav-button">
-						<a href="#" class="button">Get Started</a>
+						<a href="#" class="button" @click="showRegistrationDialog">Get Started</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</header>
 	<main>
-		<LoginForm></LoginForm>
+		<Modal v-if="showLogin" :show-modal="showLogin" @close="showLogin = false" title="Log in">
+      		<LoginForm @login="handleLogin"></LoginForm>
+    	</Modal>
+		<Modal v-if="showRegistration" :show-modal="showRegistration" @close="showRegistration = false" title="Register">
+      		<RegistrationForm @register="handleRegistration"></RegistrationForm>
+    	</Modal>
 		<div class="info-block-list">
 			<InfoBlock>
 				<div class="home-block__content">
@@ -25,7 +30,7 @@
 						informed financial decisions and achieve your goals.
 					</p>
 					<div class="home-block__buttons">
-						<a href="#" class="button">
+						<a href="#" class="button" @click="showRegistrationDialog">
 							Start manage
 							<svg
 								width="30"
@@ -74,7 +79,7 @@
 						can achieve great success in personal finance
 					</p>
 					<div class="home-block__buttons">
-						<a href="#" class="button">
+						<a href="#" class="button" @click="showRegistrationDialog">
 							Start manage
 							<svg
 								width="30"
@@ -99,17 +104,36 @@
 	</main>
 </template>
 <script>
-	import InfoBlock from "../components/InfoBlock.vue";
-	import LoginForm from "../components/LoginForm.vue";
+import InfoBlock from "../components/InfoBlock.vue";
+import LoginForm from "../components/LoginForm.vue";
+import Modal from "../components/Modal.vue";
+import RegistrationForm from "../components/RegistrationForm.vue";
 
-	export default {
-		data() {
-			return {
-				users: [],
-			};
-		},
-		components: { InfoBlock, LoginForm },
-	};
+export default {
+  data() {
+    return {
+      showLogin: false,
+	  showRegistration: false, 
+    };
+  },
+  components: { InfoBlock, LoginForm, RegistrationForm, Modal },
+  methods: {
+    showLoginDialog() {
+      this.showLogin = true;
+    },
+	showRegistrationDialog() {
+      this.showRegistration = true; // Method to show the registration dialog
+    },
+    handleLogin(user) {
+      // Handle user login
+      this.showLogin = false; // Close the login dialog after login
+    },
+	handleRegistration(user) {
+      // Handle user registration
+      this.showRegistration = false; // Close the registration dialog after registration
+ 	},
+  }
+};
 </script>
 <style lang="scss" scoped>
 	.header {
