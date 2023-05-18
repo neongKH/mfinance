@@ -101,8 +101,8 @@
 				</div>
 			</InfoBlock>
 		</div>
+
 	</main>
-	<h1>{{ transaction }}</h1>
 </template>
 <script>
 import InfoBlock from "../components/InfoBlock.vue";
@@ -115,7 +115,7 @@ export default {
     return {
       showLogin: false,
 	  showRegistration: false, 
-	  transaction
+	  listItems: []
     };
 	
   },
@@ -136,6 +136,8 @@ export default {
       // Handle user registration
       this.showRegistration = false; // Close the registration dialog after registration
  	},
+	
+
   }
 };
 </script>
