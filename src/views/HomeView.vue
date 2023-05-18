@@ -102,6 +102,7 @@
 			</InfoBlock>
 		</div>
 	</main>
+	<h1>{{ transaction }}</h1>
 </template>
 <script>
 import InfoBlock from "../components/InfoBlock.vue";
@@ -114,10 +115,13 @@ export default {
     return {
       showLogin: false,
 	  showRegistration: false, 
+	  transaction
     };
+	
   },
   components: { InfoBlock, LoginForm, RegistrationForm, Modal },
   methods: {
+	
     showLoginDialog() {
       this.showLogin = true;
     },

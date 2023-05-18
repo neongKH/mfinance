@@ -50,6 +50,7 @@
 				}
 			}
 		}
+		
 
 		&__buttons {
 			display: flex;
