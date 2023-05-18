@@ -8,19 +8,29 @@
 						<a class="login" @click="showLoginDialog">Log in</a>
 					</div>
 					<div class="header__nav-button">
-						<a href="#" class="button" @click="showRegistrationDialog">Get Started</a>
+						<a
+							href="#"
+							class="button"
+							@click="showRegistrationDialog"
+							>Get Started</a
+						>
 					</div>
 				</div>
 			</div>
 		</div>
 	</header>
 	<main>
-		<Modal v-if="showLogin" :show-modal="showLogin" @close="showLogin = false" title="Log in">
-      		<LoginForm @login="handleLogin"></LoginForm>
-    	</Modal>
-		<Modal v-if="showRegistration" :show-modal="showRegistration" @close="showRegistration = false" title="Register">
-      		<RegistrationForm @register="handleRegistration"></RegistrationForm>
-    	</Modal>
+		<Modal :class="{ active: showLogin }" @close="showLoginDialog()">
+			<h2>Log in</h2>
+			<LoginForm @login="handleLogin"></LoginForm>
+		</Modal>
+		<Modal
+			:class="{ active: showRegistration }"
+			@close="showRegistrationDialog()"
+		>
+			<h2>Register</h2>
+			<RegistrationForm @register="handleRegistration"></RegistrationForm>
+		</Modal>
 		<div class="info-block-list">
 			<InfoBlock>
 				<div class="home-block__content">
@@ -30,7 +40,11 @@
 						informed financial decisions and achieve your goals.
 					</p>
 					<div class="home-block__buttons">
-						<a href="#" class="button" @click="showRegistrationDialog">
+						<a
+							href="#"
+							class="button"
+							@click="showRegistrationDialog"
+						>
 							Start manage
 							<svg
 								width="30"
@@ -79,7 +93,11 @@
 						can achieve great success in personal finance
 					</p>
 					<div class="home-block__buttons">
-						<a href="#" class="button" @click="showRegistrationDialog">
+						<a
+							href="#"
+							class="button"
+							@click="showRegistrationDialog"
+						>
 							Start manage
 							<svg
 								width="30"
@@ -102,42 +120,38 @@
 			</InfoBlock>
 		</div>
 	</main>
-	<h1>{{ transaction }}</h1>
 </template>
 <script>
-import InfoBlock from "../components/InfoBlock.vue";
-import LoginForm from "../components/LoginForm.vue";
-import Modal from "../components/Modal.vue";
-import RegistrationForm from "../components/RegistrationForm.vue";
+	import InfoBlock from "../components/InfoBlock.vue";
+	import LoginForm from "../components/LoginForm.vue";
+	import Modal from "../components/Modal.vue";
+	import RegistrationForm from "../components/RegistrationForm.vue";
 
-export default {
-  data() {
-    return {
-      showLogin: false,
-	  showRegistration: false, 
-	  transaction
-    };
-	
-  },
-  components: { InfoBlock, LoginForm, RegistrationForm, Modal },
-  methods: {
-	
-    showLoginDialog() {
-      this.showLogin = true;
-    },
-	showRegistrationDialog() {
-      this.showRegistration = true; // Method to show the registration dialog
-    },
-    handleLogin(user) {
-      // Handle user login
-      this.showLogin = false; // Close the login dialog after login
-    },
-	handleRegistration(user) {
-      // Handle user registration
-      this.showRegistration = false; // Close the registration dialog after registration
- 	},
-  }
-};
+	export default {
+		data() {
+			return {
+				showLogin: false,
+				showRegistration: false,
+			};
+		},
+		components: { InfoBlock, LoginForm, RegistrationForm, Modal },
+		methods: {
+			showLoginDialog() {
+				this.showLogin = !this.showLogin;
+				document.body.classList.add("modal-open");
+			},
+			showRegistrationDialog() {
+				this.showRegistration = !this.showRegistration;
+				document.body.classList.add("modal-open");
+			},
+			handleLogin() {
+				this.showLogin = false; // Close the login dialog after login
+			},
+			handleRegistration() {
+				this.showRegistration = false; // Close the registration dialog after registration
+			},
+		},
+	};
 </script>
 <style lang="scss" scoped>
 	.header {

@@ -15,7 +15,7 @@ class AuthService {
 	async transactions(transactions) {
 		const response = await axios.get(API, {
 			user: transactions.user,
-			category: transactions.category
+			category: transactions.category,
 		});
 		localStorage.setItem("transaction", JSON.stringify(response.data));
 		return response.data;
@@ -26,12 +26,12 @@ class AuthService {
 	}
 
 	register(user) {
-		return axios.post(API_URL + "user", { // Update the endpoint URL to the registration endpoint
-		  username: user.username,
-		  email: user.email,
-		  password: user.password,
+		return axios.post(API_URL + "api/auth/users", {
+			username: user.username,
+			email: user.email,
+			password: user.password,
 		});
-	  }
+	}
 
 	verify() {
 		const user = JSON.parse(localStorage.getItem("user"));
